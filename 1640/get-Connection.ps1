@@ -8,12 +8,14 @@ $Status = o365 status
 if($Status -like 'connectedAs*')
 {
     Write-Host 'Connection Available.. Connection Status - ' $Status
-    #o365 logout
 }
 else 
 {
     $Username = 'arjun@a-um.me'
-    $Password = 'P@ssw0rd4aum'
+    $PasswordEncrypted = Read-Host -Prompt 'Type in your Password' -AsSecureString
+    $bstr = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($PasswordEncrypted)
+    $Password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($bstr)
+
     write-Host 'NO Connection Available. Connecting as ' + $Username
     o365 login -t password -u $Username -p $Password
 }
