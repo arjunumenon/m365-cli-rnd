@@ -1,14 +1,6 @@
 #Using the Office365CLI to list all Teams apps in all Microsoft Teams teams of your tenant
 
-if(o365 status -contains 'connectedAs')
-{
-    Write-Host 'Logged in'
-}
-else {
-    write-Host 'NOT CONNECTED'
-}
-
-o365 login -t password -u "arjun@a-um.me" -p "P@ssw0rd4aum"
+& .\get-Connection.ps1
 
 $availableTeams = o365 teams team list -o json | ConvertFrom-Json
 

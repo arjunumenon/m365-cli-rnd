@@ -1,7 +1,7 @@
 # Small script that iterates through all Microsoft Teams teams
 # and counts the usage of Teams apps using the Office365CLI
 
-#o365 login -t password -u "%USER_NAME" -p "%PASSWORD%"
+& .\get-Connection.ps1
 
 $availableTeams = o365 teams team list -o json | ConvertFrom-Json
 
