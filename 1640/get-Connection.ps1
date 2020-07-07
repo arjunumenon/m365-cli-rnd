@@ -11,7 +11,7 @@ if($Status -like 'connectedAs*')
 }
 else 
 {
-    $Username = 'arjun@a-um.me'
+    $Username = 'arjun@aum365.onmicrosoft.com'
     $PasswordEncrypted = Read-Host -Prompt 'Type in your Password' -AsSecureString
     $bstr = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($PasswordEncrypted)
     $Password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($bstr)

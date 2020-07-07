@@ -1,4 +1,4 @@
-#Using the Office365CLI to list all Teams apps in all Microsoft Teams teams of your tenant
+
 
 & .\get-Connection.ps1
 
@@ -16,3 +16,4 @@ foreach ($team in $availableTeams) {
     Write-Output "All apps in team: " $team.displayName " " $team.id
     Write-Output $apps
 }
+

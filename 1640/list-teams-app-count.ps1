@@ -18,7 +18,7 @@ foreach ($team in $availableTeams) {
     Write-Host "Counting apps in team: " $team.displayName " " $team.id
     $appsJson = $apps | ConvertFrom-Json
 
-    $appsJson | foreach {
+    $appsJson | ForEach-Object {
         if ($appcounts.ContainsKey($_.teamsApp.displayName)) {
             $appcounts[$_.teamsApp.displayName] = [Int32]$appcounts[$_.teamsApp.displayName] + 1    
         }
