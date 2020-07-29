@@ -15,3 +15,7 @@ Adding commit three
 #Another Commit
 
 Fourth one
+
+#Final Commit
+
+Now things are finalized.. This should be the final one...
