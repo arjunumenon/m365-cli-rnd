@@ -1,0 +1,630 @@
+{
+    "anonymousLinkExpirationRestrictionDays": 7,
+    "anyoneLinkTrackUsers": false,
+    "blockPeoplePickerAndSharing": false,
+    "canAddExternalPrincipal": true,
+    "canAddInternalPrincipal": true,
+    "canRequestAccessForGrantAccess": true,
+    "canSendEmail": true,
+    "canUseSimplifiedRoles": true,
+    "currentRole": 3,
+    "customizedExternalSharingServiceUrl": "",
+    "defaultLinkKind": 1,
+    "defaultShareLinkPermission": 1,
+    "defaultShareLinkScope": 2,
+    "defaultShareLinkToExistingAccess": false,
+    "directUrl": "https://contoso.sharepoint.com/:w:/r/sites/M365CLI/Shared%20Documents/Sharing%20Central.docx?d=w8174b8edc525469fb07a5ec0ff65bb1b&csf=1&web=1",
+    "enforceIBSegmentFiltering": false,
+    "fileExtension": "docx",
+    "hasUniquePermissions": true,
+    "itemUniqueId": "8174b8ed-c525-469f-b07a-5ec0ff65bb1b",
+    "microserviceShareUiUrl": "https://www.odwebp.svc.ms/share",
+    "permissionsInformation": {
+      "hasInheritedLinks": false,
+      "links": [
+        {
+          "isInherited": false,
+          "linkDetails": {
+            "AllowsAnonymousAccess": false,
+            "ApplicationId": null,
+            "BlocksDownload": false,
+            "Created": "2020-09-28T10:06:05.795Z",
+            "CreatedBy": {
+              "email": "owner@contoso.com",
+              "expiration": "",
+              "id": 7,
+              "isActive": true,
+              "isExternal": false,
+              "jobTitle": "Jedi Master",
+              "loginName": "i:0#.f|membership|owner@contoso.com",
+              "name": "Arjun",
+              "principalType": 0,
+              "userId": null,
+              "userPrincipalName": "owner@contoso.com"
+            },
+            "Description": null,
+            "Embeddable": false,
+            "Expiration": "",
+            "HasExternalGuestInvitees": true,
+            "Invitations": [
+              {
+                "invitedBy": {
+                  "email": "owner@contoso.com",
+                  "expiration": "",
+                  "id": 7,
+                  "isActive": true,
+                  "isExternal": false,
+                  "jobTitle": "Jedi Master",
+                  "loginName": "i:0#.f|membership|owner@contoso.com",
+                  "name": "Arjun",
+                  "principalType": 1,
+                  "userId": null,
+                  "userPrincipalName": "owner@contoso.com"
+                },
+                "invitedOn": "2020-09-28T10:06:05.686Z",
+                "invitee": {
+                  "email": "invitee1@contoso.com",
+                  "expiration": "",
+                  "id": 12,
+                  "isActive": true,
+                  "isExternal": false,
+                  "jobTitle": "Chief Finance Officer",
+                  "loginName": "i:0#.f|membership|invitee1@contoso.com",
+                  "name": "Louis Litt",
+                  "principalType": 1,
+                  "userId": null,
+                  "userPrincipalName": "invitee1@contoso.com"
+                }
+              },
+              {
+                "invitedBy": {
+                  "email": "owner@contoso.com",
+                  "expiration": "",
+                  "id": 7,
+                  "isActive": true,
+                  "isExternal": false,
+                  "jobTitle": "Jedi Master",
+                  "loginName": "i:0#.f|membership|owner@contoso.com",
+                  "name": "Arjun",
+                  "principalType": 1,
+                  "userId": null,
+                  "userPrincipalName": "owner@contoso.com"
+                },
+                "invitedOn": "2020-10-05T15:19:45.625Z",
+                "invitee": {
+                  "email": "externaluser1@externalcontoso.onmicrosoft.com",
+                  "expiration": null,
+                  "id": -1,
+                  "isActive": false,
+                  "isExternal": true,
+                  "jobTitle": null,
+                  "loginName": null,
+                  "name": "externaluser1@externalcontoso.onmicrosoft.com",
+                  "principalType": 0,
+                  "userId": null,
+                  "userPrincipalName": null
+                }
+              }
+            ],
+            "IsActive": true,
+            "IsAddressBarLink": false,
+            "IsCreateOnlyLink": false,
+            "IsDefault": true,
+            "IsEditLink": false,
+            "IsFormsLink": false,
+            "IsReviewLink": false,
+            "IsUnhealthy": false,
+            "LastModified": "2020-10-05T15:33:43.170Z",
+            "LastModifiedBy": {
+              "email": "owner@contoso.com",
+              "expiration": "",
+              "id": 7,
+              "isActive": true,
+              "isExternal": false,
+              "jobTitle": "Jedi Master",
+              "loginName": "i:0#.f|membership|owner@contoso.com",
+              "name": "Arjun",
+              "principalType": 0,
+              "userId": null,
+              "userPrincipalName": "owner@contoso.com"
+            },
+            "LimitUseToApplication": false,
+            "LinkKind": 6,
+            "PasswordLastModified": "",
+            "PasswordLastModifiedBy": null,
+            "RedeemedUsers": [],
+            "RequiresPassword": false,
+            "RestrictedShareMembership": true,
+            "Scope": 2,
+            "ShareId": "7d15b06a-c1c0-48c7-b266-bfc4e917e111",
+            "ShareTokenString": "share=Ee24dIElxZ9GsHpewP9luxsBeMxFgCkentWnwSItLbVsKg",
+            "SharingLinkStatus": 0,
+            "TrackLinkUsers": false,
+            "Url": "https://contoso.sharepoint.com/:w:/s/M365CLI/Ee24dIElxZ9GsHpewP9luxsBeMxFgCkentWnwSItLbVsKg"
+          },
+          "linkMembers": [
+            {
+              "email": "invitee1@contoso.com",
+              "expiration": "",
+              "id": 12,
+              "isActive": true,
+              "isExternal": false,
+              "jobTitle": "Chief Finance Officer",
+              "loginName": "i:0#.f|membership|invitee1@contoso.com",
+              "name": "Louis Litt",
+              "principalType": 1,
+              "userId": null,
+              "userPrincipalName": "invitee1@contoso.com"
+            }
+          ]
+        },
+        {
+          "isInherited": false,
+          "linkDetails": {
+            "AllowsAnonymousAccess": true,
+            "ApplicationId": null,
+            "BlocksDownload": false,
+            "Created": "2020-10-05T15:16:12.999Z",
+            "CreatedBy": {
+              "email": "owner@contoso.com",
+              "expiration": "",
+              "id": 7,
+              "isActive": true,
+              "isExternal": false,
+              "jobTitle": "Jedi Master",
+              "loginName": "i:0#.f|membership|owner@contoso.com",
+              "name": "Arjun",
+              "principalType": 0,
+              "userId": null,
+              "userPrincipalName": "owner@contoso.com"
+            },
+            "Description": null,
+            "Embeddable": false,
+            "Expiration": "2020-10-12T15:16:07.000Z",
+            "HasExternalGuestInvitees": false,
+            "Invitations": [],
+            "IsActive": true,
+            "IsAddressBarLink": false,
+            "IsCreateOnlyLink": false,
+            "IsDefault": true,
+            "IsEditLink": false,
+            "IsFormsLink": false,
+            "IsReviewLink": false,
+            "IsUnhealthy": false,
+            "LastModified": "2020-10-05T15:16:12.999Z",
+            "LastModifiedBy": {
+              "email": "owner@contoso.com",
+              "expiration": "",
+              "id": 7,
+              "isActive": true,
+              "isExternal": false,
+              "jobTitle": "Jedi Master",
+              "loginName": "i:0#.f|membership|owner@contoso.com",
+              "name": "Arjun",
+              "principalType": 0,
+              "userId": null,
+              "userPrincipalName": "owner@contoso.com"
+            },
+            "LimitUseToApplication": false,
+            "LinkKind": 4,
+            "PasswordLastModified": "",
+            "PasswordLastModifiedBy": null,
+            "RedeemedUsers": [],
+            "RequiresPassword": false,
+            "RestrictedShareMembership": false,
+            "Scope": 0,
+            "ShareId": "b1871b9c-30c4-4575-8ddc-fcddf1f90b20",
+            "ShareTokenString": "share=Ee24dIElxZ9GsHpewP9luxsBkb3LiC7CGAEe9DfqYyN8rA",
+            "SharingLinkStatus": 0,
+            "TrackLinkUsers": false,
+            "Url": "https://contoso.sharepoint.com/:w:/s/M365CLI/Ee24dIElxZ9GsHpewP9luxsBkb3LiC7CGAEe9DfqYyN8rA"
+          },
+          "linkMembers": []
+        },
+        {
+          "isInherited": false,
+          "linkDetails": {
+            "AllowsAnonymousAccess": false,
+            "ApplicationId": null,
+            "BlocksDownload": false,
+            "Created": "",
+            "CreatedBy": null,
+            "Description": null,
+            "Embeddable": false,
+            "Expiration": "",
+            "HasExternalGuestInvitees": false,
+            "Invitations": [],
+            "IsActive": false,
+            "IsAddressBarLink": false,
+            "IsCreateOnlyLink": false,
+            "IsDefault": true,
+            "IsEditLink": false,
+            "IsFormsLink": false,
+            "IsReviewLink": false,
+            "IsUnhealthy": false,
+            "LastModified": "",
+            "LastModifiedBy": null,
+            "LimitUseToApplication": false,
+            "LinkKind": 5,
+            "PasswordLastModified": "",
+            "PasswordLastModifiedBy": null,
+            "RedeemedUsers": [],
+            "RequiresPassword": false,
+            "RestrictedShareMembership": false,
+            "Scope": -1,
+            "ShareId": "00000000-0000-0000-0000-000000000000",
+            "ShareTokenString": null,
+            "SharingLinkStatus": 0,
+            "TrackLinkUsers": false,
+            "Url": null
+          },
+          "linkMembers": []
+        },
+        {
+          "isInherited": false,
+          "linkDetails": {
+            "AllowsAnonymousAccess": false,
+            "ApplicationId": null,
+            "BlocksDownload": false,
+            "Created": "",
+            "CreatedBy": null,
+            "Description": null,
+            "Embeddable": false,
+            "Expiration": "",
+            "HasExternalGuestInvitees": false,
+            "Invitations": [],
+            "IsActive": false,
+            "IsAddressBarLink": false,
+            "IsCreateOnlyLink": false,
+            "IsDefault": true,
+            "IsEditLink": false,
+            "IsFormsLink": false,
+            "IsReviewLink": false,
+            "IsUnhealthy": false,
+            "LastModified": "",
+            "LastModifiedBy": null,
+            "LimitUseToApplication": false,
+            "LinkKind": 3,
+            "PasswordLastModified": "",
+            "PasswordLastModifiedBy": null,
+            "RedeemedUsers": [],
+            "RequiresPassword": false,
+            "RestrictedShareMembership": false,
+            "Scope": -1,
+            "ShareId": "00000000-0000-0000-0000-000000000000",
+            "ShareTokenString": null,
+            "SharingLinkStatus": 0,
+            "TrackLinkUsers": false,
+            "Url": null
+          },
+          "linkMembers": []
+        },
+        {
+          "isInherited": false,
+          "linkDetails": {
+            "AllowsAnonymousAccess": false,
+            "ApplicationId": null,
+            "BlocksDownload": false,
+            "Created": "",
+            "CreatedBy": null,
+            "Description": null,
+            "Embeddable": false,
+            "Expiration": "",
+            "HasExternalGuestInvitees": false,
+            "Invitations": [],
+            "IsActive": false,
+            "IsAddressBarLink": false,
+            "IsCreateOnlyLink": false,
+            "IsDefault": true,
+            "IsEditLink": false,
+            "IsFormsLink": false,
+            "IsReviewLink": false,
+            "IsUnhealthy": false,
+            "LastModified": "",
+            "LastModifiedBy": null,
+            "LimitUseToApplication": false,
+            "LinkKind": 2,
+            "PasswordLastModified": "",
+            "PasswordLastModifiedBy": null,
+            "RedeemedUsers": [],
+            "RequiresPassword": false,
+            "RestrictedShareMembership": false,
+            "Scope": -1,
+            "ShareId": "00000000-0000-0000-0000-000000000000",
+            "ShareTokenString": null,
+            "SharingLinkStatus": 0,
+            "TrackLinkUsers": false,
+            "Url": null
+          },
+          "linkMembers": []
+        }
+      ],
+      "principals": [
+        {
+          "principal": {
+            "email": "",
+            "expiration": null,
+            "id": 3,
+            "isActive": true,
+            "isExternal": false,
+            "jobTitle": null,
+            "loginName": "O365CLI Owners",
+            "name": "O365CLI Owners",
+            "principalType": 8,
+            "userId": null,
+            "userPrincipalName": null
+          },
+          "role": 3
+        },
+        {
+          "principal": {
+            "email": "",
+            "expiration": null,
+            "id": 4,
+            "isActive": true,
+            "isExternal": false,
+            "jobTitle": null,
+            "loginName": "O365CLI Visitors",
+            "name": "O365CLI Visitors",
+            "principalType": 8,
+            "userId": null,
+            "userPrincipalName": null
+          },
+          "role": 1
+        },
+        {
+          "principal": {
+            "email": "",
+            "expiration": null,
+            "id": 5,
+            "isActive": true,
+            "isExternal": false,
+            "jobTitle": null,
+            "loginName": "O365CLI Members",
+            "name": "O365CLI Members",
+            "principalType": 8,
+            "userId": null,
+            "userPrincipalName": null
+          },
+          "role": 2
+        }
+      ],
+      "siteAdmins": [
+        {
+          "principal": {
+            "email": "Arjun@contoso.com",
+            "expiration": "",
+            "id": 7,
+            "isActive": true,
+            "isExternal": false,
+            "jobTitle": "Jedi Master",
+            "loginName": "i:0#.f|membership|owner@contoso.com",
+            "name": "Arjun",
+            "principalType": 1,
+            "userId": null,
+            "userPrincipalName": "owner@contoso.com"
+          },
+          "role": 3
+        }
+      ]
+    },
+    "sharedObjectType": 1,
+    "shareUiUrl": "https://contoso.sharepoint.com/sites/M365CLI/Shared%20Documents/Forms/AllItems.aspx?p=12&id=%2Fsites%2FM365CLI%2FShared%20Documents%2FSharing%20Central%2Edocx&clientId=clientId",
+    "sharingAbilities": {
+      "anonymousLinkAbilities": {
+        "canAddNewExternalPrincipals": {
+          "disabledReason": -1,
+          "enabled": false
+        },
+        "canGetEditLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canGetReadLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canGetReviewLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canHaveExternalUsers": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageEditLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageReadLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageReviewLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "linkExpiration": {
+          "disabledReason": 0,
+          "enabled": true,
+          "defaultExpirationInDays": 7
+        },
+        "passwordProtected": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "supportsRestrictedView": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "trackLinkUsers": null
+      },
+      "anyoneLinkAbilities": {
+        "canAddNewExternalPrincipals": {
+          "disabledReason": -1,
+          "enabled": false
+        },
+        "canGetEditLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canGetReadLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canGetReviewLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canHaveExternalUsers": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageEditLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageReadLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageReviewLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "linkExpiration": {
+          "disabledReason": 0,
+          "enabled": true,
+          "defaultExpirationInDays": 7
+        },
+        "passwordProtected": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "supportsRestrictedView": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "trackLinkUsers": null
+      },
+      "directSharingAbilities": {
+        "canAddExternalPrincipal": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canAddInternalPrincipal": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canRequestGrantAccess": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "supportsReviewPermission": {
+          "disabledReason": 0,
+          "enabled": true
+        }
+      },
+      "organizationLinkAbilities": {
+        "canAddNewExternalPrincipals": {
+          "disabledReason": -1,
+          "enabled": false
+        },
+        "canGetEditLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canGetReadLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canGetReviewLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canHaveExternalUsers": {
+          "disabledReason": -1,
+          "enabled": false
+        },
+        "canManageEditLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageReadLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageReviewLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "linkExpiration": {
+          "disabledReason": -1,
+          "enabled": false,
+          "defaultExpirationInDays": 0
+        },
+        "passwordProtected": {
+          "disabledReason": -1,
+          "enabled": false
+        },
+        "supportsRestrictedView": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "trackLinkUsers": null
+      },
+      "peopleSharingLinkAbilities": {
+        "canAddNewExternalPrincipals": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canGetEditLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canGetReadLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canGetReviewLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canHaveExternalUsers": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageEditLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageReadLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "canManageReviewLink": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "linkExpiration": {
+          "disabledReason": -1,
+          "enabled": false,
+          "defaultExpirationInDays": 0
+        },
+        "passwordProtected": {
+          "disabledReason": -1,
+          "enabled": false
+        },
+        "supportsRestrictedView": {
+          "disabledReason": 0,
+          "enabled": true
+        },
+        "trackLinkUsers": null
+      }
+    },
+    "sharingStatus": 2,
+    "showExternalSharingWarning": false,
+    "siteIBSegmentIDs": [],
+    "webTemplateId": 68,
+    "webUrl": "https://contoso.sharepoint.com/sites/M365CLI"
+  }
