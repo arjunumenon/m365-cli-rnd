@@ -14,7 +14,7 @@ if($CurrentList -eq $null){
     @{fieldname="Workload";fieldtype="Text";},@{fieldname="FirstIdentifiedDate";fieldtype="DateTime";},@{fieldname="WorkflowJSONData";fieldtype="Note";}
     )
     Foreach ($field in $FieldLists){
-        $addedField = m365 spo field add --webUrl $webURL --listTitle 'M365 Health Status' --xml "<Field Type='$($field.fieldtype)' DisplayName='$($field.fieldname)' Required='FALSE' EnforceUniqueValues='FALSE' Indexed='FALSE' StaticName='$($field.fieldname)' Name='$($field.fieldname)'></Field>" --options  AddFieldToDefaultView
+        $addedField = m365 spo field add --webUrl $webURL --listTitle $listName --xml "<Field Type='$($field.fieldtype)' DisplayName='$($field.fieldname)' Required='FALSE' EnforceUniqueValues='FALSE' Indexed='FALSE' StaticName='$($field.fieldname)' Name='$($field.fieldname)'></Field>" --options  AddFieldToDefaultView
     }
 }
 
