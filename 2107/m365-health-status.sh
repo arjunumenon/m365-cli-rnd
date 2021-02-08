@@ -15,12 +15,6 @@ then
       {"fieldname":"FirstIdentifiedDate","fieldtype":"DateTime"},
       {"fieldname":"WorkflowJSONData","fieldtype":"Note"}]'
       for field in $(echo $FieldLists | jq -c '.[]'); do
-            fieldName=$(echo $field | jq -r ''.fieldname)
-            fieldType=$(echo $field | jq -r ''.fieldtype)
-
-            echo $fieldName
-            echo $fieldType
-            #m365 spo field add --webUrl $webURL --listTitle "$listName" --xml "<Field Type='$fieldType' DisplayName='$fieldName' Required='FALSE' EnforceUniqueValues='FALSE' Indexed='FALSE' StaticName='$fieldName' Name='$fieldName'></Field>" --options  AddFieldToDefaultView --debug
             addedField=$(m365 spo field add --webUrl $webURL --listTitle "$listName" --xml "<Field Type='$(echo $field | jq -r ''.fieldtype)' DisplayName='$(echo $field | jq -r ''.fieldname)' Required='FALSE' EnforceUniqueValues='FALSE' Indexed='FALSE' StaticName='$(echo $field | jq -r ''.fieldname)' Name='$(echo $field | jq -r ''.fieldname)'></Field>" --options  AddFieldToDefaultView)
       done
 fi
