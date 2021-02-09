@@ -24,9 +24,12 @@ workLoads=$(m365 tenant status list --query "value[?Status != 'ServiceOperationa
 currentOutageServices=$(m365 spo listitem list --webUrl $webURL --title "$listName" --fields "Title, Workload, Id"  --output json)
 
 #echo $workLoads
-#echo $currentOutageServices
+echo $currentOutageServices
 
 #Checking for any new outages
-for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
-      echo $workLoad
+for workLoad in $(echo $workLoads | jq -c '.[].Workload'); do
+      #echo $workLoad
+      echo $(echo $currentOutageServices | jq -r '.[].ID')
+      #echo $(echo $currentOutageServices | jq -c '.[].Workload | select(.Workload=="SharePoint")')
+      #echo $(echo $currentOutageServices | jq -r '.[].Workload | select(.Workload==$(echo $workLoad))')
 done
