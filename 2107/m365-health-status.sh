@@ -26,6 +26,8 @@ currentOutageServices=$(m365 spo listitem list --webUrl $webURL --title "$listNa
 #echo $workLoads
 echo $currentOutageServices
 
+#Dummy Change
+
 #Checking for any new outages
 for workLoad in $(echo $workLoads | jq -c '.[].Workload'); do
       #echo $workLoad
