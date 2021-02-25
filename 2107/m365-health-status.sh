@@ -23,21 +23,19 @@ fi
 workLoads=$(m365 tenant status list --query "value[?Status != 'ServiceOperational']"  --output json)
 currentOutageServices=$(m365 spo listitem list --webUrl $webURL --title "$listName" --fields "Title, Workload, Id"  --output json)
 
-echo $currentOutageServices
+#echo $currentOutageServices
 #echo $workLoads
 
 #Dummy Change
 
 #Checking for any new outages
 for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
-      echo $workLoad
-      existingWorkload=$(echo $currentOutageServices | jq -r '.[].Title | select(. == "'"$workLoad"'")')
 
-      if [ -z "$existingWorkload" ]
+      if [ -z $(echo $currentOutageServices | jq -r '.[].Title | select(. == "'"$workLoad"'")') ]  
       then
-            echo "NOPE"
+            echo "$workLoad NOPE"
+            #addedRecord=$(m365 spo listitem add --webUrl $webURL --listTitle "$listName" --contentType Item --Title $workload.WorkloadDisplayName --Workload $workload.Workload --FirstIdentifiedDate (Get-Date -Date $workload.StatusTime -Format "MM/dd/yyyy HH:mm") --WorkflowJSONData (Out-String -InputObject $workload -Width 100))
       else
-            echo "Exists"
+            echo "$workLoad Exists"
       fi
-
 done
