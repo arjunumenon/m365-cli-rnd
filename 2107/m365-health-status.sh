@@ -1,5 +1,6 @@
 # defaultIFS=$IFS
 # IFS=$'\n'
+#!/bin/sh
 
 webURL="https://aum365.sharepoint.com/sites/M365CLI"
 listName="M365 Health StatusBASH"
@@ -20,8 +21,10 @@ then
 fi
 
 #Getting current status and do the needed operation
-workLoads=$(m365 tenant status list --query "value[?Status != 'ServiceOperational']"  --output json)
+workLoads=$(m365 tenant status list --query "value[?Status != 'ServiceOperational']"  --output json | jq -r '.[]')
 currentOutageServices=$(m365 spo listitem list --webUrl $webURL --title "$listName" --fields "Title, Workload, Id"  --output json)
+
+echo $(jq -r '.' <<< "$workLoads")
 
 #echo $currentOutageServices
 #echo $workLoads
@@ -29,13 +32,37 @@ currentOutageServices=$(m365 spo listitem list --webUrl $webURL --title "$listNa
 #Dummy Change
 
 #Checking for any new outages
-for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
 
-      if [ -z $(echo $currentOutageServices | jq -r '.[].Title | select(. == "'"$workLoad"'")') ]  
-      then
-            echo "$workLoad NOPE"
-            #addedRecord=$(m365 spo listitem add --webUrl $webURL --listTitle "$listName" --contentType Item --Title $workload.WorkloadDisplayName --Workload $workload.Workload --FirstIdentifiedDate (Get-Date -Date $workload.StatusTime -Format "MM/dd/yyyy HH:mm") --WorkflowJSONData (Out-String -InputObject $workload -Width 100))
-      else
-            echo "$workLoad Exists"
-      fi
-done
+###OLD LOOPS
+
+#cat $(echo $workLoads | jq --raw-output '.| keys')
+
+#$workLoads | jq --raw-output '.| keys'
+
+# for workLoad in $(echo $workLoads | jq --raw-output '.| keys'); do 
+#       echo "Loop"
+#       echo $workLoad
+# done
+
+# runningCounter=0
+# for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do     
+
+#       echo $runningCounter
+
+#       echo $workLoads jq '.[0]'
+#       #echo $workLoads | jq '.[$(echo $runningCounter)]'
+
+#       echo " #################     LOOOOOOOOOOOP          ####"
+
+#       #echo $workLoad
+#       runningCounter=$((runningCounter+=1))
+
+#       # if [ -z $(echo $currentOutageServices | jq -r '.[].Title | select(. == "'"$workLoad"'")') ]  
+#       # then
+#       #       echo "$workLoad NOPE"
+
+#       #       #addedRecord=$(m365 spo listitem add --webUrl $webURL --listTitle "$listName" --contentType Item --Title $workload.WorkloadDisplayName --Workload $workload.Workload --FirstIdentifiedDate (Get-Date -Date $workload.StatusTime -Format "MM/dd/yyyy HH:mm") --WorkflowJSONData (Out-String -InputObject $workload -Width 100))
+#       # else
+#       #       echo "$workLoad Exists"
+#       # fi
+# done
