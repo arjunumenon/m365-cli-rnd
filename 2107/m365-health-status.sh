@@ -1,6 +1,3 @@
-# defaultIFS=$IFS
-# IFS=$'\n'
-
 webURL="https://aum365.sharepoint.com/sites/M365CLI"
 listName="M365 Health StatusBASH"
 #Email address to which an outage email will be sent
