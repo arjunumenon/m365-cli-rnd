@@ -1,6 +1,5 @@
 $webURL = "https://aum365.sharepoint.com/sites/M365CLI"
 $listName = "M365 Health Status"
-
 #Email address to which an outage email will be sent
 $notifyEmail = "arjun@aum365.onmicrosoft.com"
 
