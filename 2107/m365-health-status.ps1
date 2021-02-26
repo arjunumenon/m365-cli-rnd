@@ -1,6 +1,9 @@
 $webURL = "https://aum365.sharepoint.com/sites/M365CLI"
 $listName = "M365 Health Status"
 
+#Email address to which an outage email will be sent
+$notifyEmail = "arjun@aum365.onmicrosoft.com"
+
 $CurrentList = (m365 spo list get --title $listName --webUrl $webURL --output json) | ConvertFrom-Json
 
 #Checking whether List exists. Will create the list if the List doest not exist
@@ -22,8 +25,6 @@ if($CurrentList -eq $null){
 $workLoads = m365 tenant status list --query "value[?Status != 'ServiceOperational']"  --output json  | ConvertFrom-Json
 $currentOutageServices = (m365 spo listitem list --webUrl $webURL --title $listName --fields "Title, Workload, Id"  --output json).Replace("ID", "_ID") | ConvertFrom-Json
 
-$notifyEmail = "arjun@aum365.onmicrosoft.com"
-
 #Checking for any new outages
 Foreach ($workload in $workLoads){
     if($workload.Workload -notin $currentOutageServices.Workload){
@@ -31,7 +32,7 @@ Foreach ($workload in $workLoads){
         $addedWorkLoad = m365 spo listitem add --webUrl $webURL --listTitle $listName --contentType Item --Title $workload.WorkloadDisplayName --Workload $workload.Workload --FirstIdentifiedDate (Get-Date -Date $workload.StatusTime -Format "MM/dd/yyyy HH:mm") --WorkflowJSONData (Out-String -InputObject $workload -Width 100)
 
         #Send notification using CLI Commands
-        m365 outlook mail send --to $notifyEmail --subject "Outage Reported in $($workload.WorkloadDisplayName)" --bodyContents "Any outage has been reported for the Service : $($workload.WorkloadDisplayName) <a href='$webURL/Lists/$listName'>Access the Health Status List</a>" --bodyContentType HTML --saveToSentItems false
+        m365 outlook mail send --to $notifyEmail --subject "Outage Reported in $($workload.WorkloadDisplayName)" --bodyContents "An outage has been reported for the Service : $($workload.WorkloadDisplayName) <a href='$webURL/Lists/$listName'>Access the Health Status List</a>" --bodyContentType HTML --saveToSentItems false
     }
 }
 
