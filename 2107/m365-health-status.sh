@@ -3,10 +3,10 @@
 
 webURL="https://aum365.sharepoint.com/sites/M365CLI"
 listName="M365 Health StatusBASH"
-CurrentList=$(m365 spo list get --webUrl $webURL --title "$listName" --output json)
-
 #Email address to which an outage email will be sent
 notifyEmail="arjun@aum365.onmicrosoft.com"
+
+CurrentList=$(m365 spo list get --webUrl $webURL --title "$listName" --output json)
 
 if [ -z "$CurrentList" ]
 then
