@@ -40,3 +40,22 @@ for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
             m365 outlook mail send --to $notifyEmail --subject "Outage Reported in $(echo $addingWorkload | jq -r '.WorkloadDisplayName')" --bodyContents "An outage has been reported for the Service : $(echo $addingWorkload | jq -r '.WorkloadDisplayName') <a href='$webURL/Lists/$listName'>Access the Health Status List</a>" --bodyContentType HTML --saveToSentItems false
       fi
 done
+
+#Checking whether any existing outages are resolved
+for service in $(echo $currentOutageServices | jq -r '.[].Title'); do
+      if [ -z $(echo $workLoads | jq -r '.[].Workload | select(. == "'"$service"'")') ]  
+      then            
+            echo "$service RESOLVED"
+            removalService=$(echo $currentOutageServices | jq -r '.[] | select(.Title == "'"$service"'")')
+
+            echo $removalService
+            
+            #Removing the outage information from SharePoint List
+            removedService=$(m365 spo listitem remove --webUrl $webURL --listTitle "$listName" --id $(echo $removalService | jq -r '.Id') --confirm)
+
+            #m365 spo listitem remove --webUrl $webURL --listTitle "$listName" --id $(echo $removalService | jq -r '.Id') --confirm --debug
+            
+            #Send notification using CLI Commands
+            m365 outlook mail send --to $notifyEmail --subject "Outage RESOLVED for $(echo $removalService | jq -r '.Title')" --bodyContents "Outage which was reported for the Service : $(echo $removalService | jq -r '.Title') is RESOLVED." --bodyContentType HTML --saveToSentItems false
+      fi
+done
