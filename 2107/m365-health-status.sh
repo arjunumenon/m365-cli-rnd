@@ -37,12 +37,12 @@ currentOutageServices=$(m365 spo listitem list --webUrl $webURL --title "$listNa
 updateSinceLastExecution=false
 echo $'\n### New Outages ###'
 for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
-      if [ -z $(echo $currentOutageServices | jq -r '.[].Title | select(. == "'"$workLoad"'")') ]  
+      if [ -z $(echo $currentOutageServices | jq -r '.[].Workload | select(. == "'"$workLoad"'")') ]  
       then            
             addingWorkload=$(echo $workLoads | jq -r '.[] | select(.Workload == "'"$workLoad"'")')
             
             #Add outage information to SharePoint List
-            addedRecord=$(m365 spo listitem add --webUrl $webURL --listTitle "$listName" --contentType Item --Title "$(echo $addingWorkload | jq -r '.Workload')" --Workload "$(echo $addingWorkload | jq -r '.WorkloadDisplayName')" --FirstIdentifiedDate "$(date -d "$(echo $addingWorkload | jq -r '.StatusTime')" '+%m/%d/%Y %H:%M:%S')" --WorkflowJSONData "$(echo $addingWorkload | jq -r '.')")
+            addedRecord=$(m365 spo listitem add --webUrl $webURL --listTitle "$listName" --contentType Item --Title "$(echo $addingWorkload | jq -r '.WorkloadDisplayName')" --Workload "$(echo $addingWorkload | jq -r '.Workload')" --FirstIdentifiedDate "$(date -d "$(echo $addingWorkload | jq -r '.StatusTime')" '+%m/%d/%Y %H:%M:%S')" --WorkflowJSONData "$(echo $addingWorkload | jq -r '.')")
             
             #Send notification using CLI Commands
             m365 outlook mail send --to $notifyEmail --subject "Outage Reported in $(echo $addingWorkload | jq -r '.WorkloadDisplayName')" --bodyContents "An outage has been reported for the Service : $(echo $addingWorkload | jq -r '.WorkloadDisplayName') <a href='$webURL/Lists/$listName'>Access the Health Status List</a>" --bodyContentType HTML --saveToSentItems false
@@ -59,10 +59,10 @@ fi
 #Checking whether any existing outages are resolved
 updateSinceLastExecution=false
 echo $'\n### Resolved Outages ###'
-for service in $(echo $currentOutageServices | jq -r '.[].Title'); do
+for service in $(echo $currentOutageServices | jq -r '.[].Workload'); do
       if [ -z $(echo $workLoads | jq -r '.[].Workload | select(. == "'"$service"'")') ]  
       then
-            removalService=$(echo $currentOutageServices | jq -r '.[] | select(.Title == "'"$service"'")')
+            removalService=$(echo $currentOutageServices | jq -r '.[] | select(.Workload == "'"$service"'")')
 
             #Removing the outage information from SharePoint List
             removedService=$(m365 spo listitem remove --webUrl $webURL --listTitle "$listName" --id $(echo $removalService | jq -r '.Id') --confirm)
