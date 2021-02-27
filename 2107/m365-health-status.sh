@@ -1,3 +1,11 @@
+#!/bin/bash
+
+# requires jq: https://stedolan.github.io/jq/
+
+defaultIFS=$IFS
+IFS=$'\n'
+
+#Ensure that you are logged in to the site mentioned in the webURL as a user who has Edit Permission
 webURL="https://aum365.sharepoint.com/sites/M365CLI"
 listName="M365 Health StatusBASH"
 #Email address to which an outage email will be sent
@@ -17,6 +25,8 @@ then
       for field in $(echo $FieldLists | jq -c '.[]'); do
             addedField=$(m365 spo field add --webUrl $webURL --listTitle "$listName" --xml "<Field Type='$(echo $field | jq -r ''.fieldtype)' DisplayName='$(echo $field | jq -r ''.fieldname)' Required='FALSE' EnforceUniqueValues='FALSE' Indexed='FALSE' StaticName='$(echo $field | jq -r ''.fieldname)' Name='$(echo $field | jq -r ''.fieldname)'></Field>" --options  AddFieldToDefaultView)
       done
+
+      echo "Created SharePoint List $listName for logging the Outages."
 fi
 
 #Getting current status and do the needed operation
@@ -24,6 +34,7 @@ workLoads=$(m365 tenant status list --query "value[?Status != 'ServiceOperationa
 currentOutageServices=$(m365 spo listitem list --webUrl $webURL --title "$listName" --fields "Title, Workload, Id"  --output json)
 
 #Checking for any new outages
+newOutageReported=false
 for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
       if [ -z $(echo $currentOutageServices | jq -r '.[].Title | select(. == "'"$workLoad"'")') ]  
       then            
@@ -34,6 +45,7 @@ for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
             
             #Send notification using CLI Commands
             m365 outlook mail send --to $notifyEmail --subject "Outage Reported in $(echo $addingWorkload | jq -r '.WorkloadDisplayName')" --bodyContents "An outage has been reported for the Service : $(echo $addingWorkload | jq -r '.WorkloadDisplayName') <a href='$webURL/Lists/$listName'>Access the Health Status List</a>" --bodyContentType HTML --saveToSentItems false
+            newOutageReported=true
       fi
 done
 
@@ -50,3 +62,10 @@ for service in $(echo $currentOutageServices | jq -r '.[].Title'); do
             m365 outlook mail send --to $notifyEmail --subject "Outage RESOLVED for $(echo $removalService | jq -r '.Title')" --bodyContents "Outage which was reported for the Service : $(echo $removalService | jq -r '.Title') is RESOLVED." --bodyContentType HTML --saveToSentItems false
       fi
 done
+
+if [ "$newOutageReported" = true ] ; 
+      then
+            echo "New Outages has been reported. Check the SharePoint List or the configured email for more information"
+      else
+            echo "No New Outages Reported."
+fi
