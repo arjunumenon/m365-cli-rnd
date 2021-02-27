@@ -7,7 +7,7 @@ IFS=$'\n'
 
 #Ensure that you are logged in to the site mentioned in the webURL as a user who has Edit Permission
 webURL="https://aum365.sharepoint.com/sites/M365CLI"
-listName="M365 Health StatusBASH"
+listName="M365 Health Status"
 #Email address to which an outage email will be sent
 notifyEmail="arjun@aum365.onmicrosoft.com"
 
@@ -45,6 +45,7 @@ for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
             
             #Send notification using CLI Commands
             m365 outlook mail send --to $notifyEmail --subject "Outage Reported in $(echo $addingWorkload | jq -r '.WorkloadDisplayName')" --bodyContents "An outage has been reported for the Service : $(echo $addingWorkload | jq -r '.WorkloadDisplayName') <a href='$webURL/Lists/$listName'>Access the Health Status List</a>" --bodyContentType HTML --saveToSentItems false
+            echo "Outage is Reported for Service : $(echo $addingWorkload | jq -r '.WorkloadDisplayName'). Please access \"$webURL/Lists/$listName\" for more information"
             newOutageReported=true
       fi
 done
@@ -63,9 +64,7 @@ for service in $(echo $currentOutageServices | jq -r '.[].Title'); do
       fi
 done
 
-if [ "$newOutageReported" = true ] ; 
+if [ "$newOutageReported" = false ] ; 
       then
-            echo "New Outages has been reported. Check the SharePoint List or the configured email for more information"
-      else
             echo "No New Outages Reported."
 fi
