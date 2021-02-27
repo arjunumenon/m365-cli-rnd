@@ -1,5 +1,5 @@
 $webURL = "https://aum365.sharepoint.com/sites/M365CLI"
-$listName = "M365 Health Status"
+$listName = "M365HealthStatus"
 #Email address to which an outage email will be sent
 $notifyEmail = "arjun@aum365.onmicrosoft.com"
 
@@ -18,6 +18,7 @@ if($CurrentList -eq $null){
     Foreach ($field in $FieldLists){
         $addedField = m365 spo field add --webUrl $webURL --listTitle $listName --xml "<Field Type='$($field.fieldtype)' DisplayName='$($field.fieldname)' Required='FALSE' EnforceUniqueValues='FALSE' Indexed='FALSE' StaticName='$($field.fieldname)' Name='$($field.fieldname)'></Field>" --options  AddFieldToDefaultView
     }
+    Write-Host "Created SharePoint List $listName for logging the Outages."
 }
 
 #Getting current Tenant Status and do the needed operations
@@ -25,6 +26,8 @@ $workLoads = m365 tenant status list --query "value[?Status != 'ServiceOperation
 $currentOutageServices = (m365 spo listitem list --webUrl $webURL --title $listName --fields "Title, Workload, Id"  --output json).Replace("ID", "_ID") | ConvertFrom-Json
 
 #Checking for any new outages
+$updateSinceLastExecution = $false
+Write-Host "### New Outages ###"
 Foreach ($workload in $workLoads){
     if($workload.Workload -notin $currentOutageServices.Workload){
         #Add outage information to SharePoint List
@@ -32,10 +35,18 @@ Foreach ($workload in $workLoads){
 
         #Send notification using CLI Commands
         m365 outlook mail send --to $notifyEmail --subject "Outage Reported in $($workload.WorkloadDisplayName)" --bodyContents "An outage has been reported for the Service : $($workload.WorkloadDisplayName) <a href='$webURL/Lists/$listName'>Access the Health Status List</a>" --bodyContentType HTML --saveToSentItems false
+
+        Write-Host "Outage is Reported for Service : $($workload.WorkloadDisplayName). Please access \"$webURL/Lists/$listName\" for more information"
+        $updateSinceLastExecution = $true
     }
+}
+if($updateSinceLastExecution -eq $false){
+    Write-Host "NO New Outages are reported yet."
 }
 
 #Checking whether any existing outages are resolved
+$updateSinceLastExecution = $false
+Write-Host "### Resolved Outages ###"
 Foreach ($Service in $currentOutageServices){
     if($Service.Workload -notin $workLoads.Workload){
 
@@ -44,5 +55,11 @@ Foreach ($Service in $currentOutageServices){
 
         #Send notification using CLI Commands
         m365 outlook mail send --to $notifyEmail --subject "Outage RESOLVED for $($Service.Title)" --bodyContents "Outage which was reported for the Service : $($Service.Title) is RESOLVED." --bodyContentType HTML --saveToSentItems false
+
+        Write-Host "Outage which was reported for the Service : $($Service.Title) is now RESOLVED."
+        $updateSinceLastExecution = $true
     }
+}
+if($updateSinceLastExecution -eq $false){
+    Write-Host "No further updates on the existing outages"
 }

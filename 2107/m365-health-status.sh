@@ -7,7 +7,7 @@ IFS=$'\n'
 
 #Ensure that you are logged in to the site mentioned in the webURL as a user who has Edit Permission
 webURL="https://aum365.sharepoint.com/sites/M365CLI"
-listName="M365 Health Status"
+listName="M365HealthStatus"
 #Email address to which an outage email will be sent
 notifyEmail="arjun@aum365.onmicrosoft.com"
 
@@ -34,7 +34,8 @@ workLoads=$(m365 tenant status list --query "value[?Status != 'ServiceOperationa
 currentOutageServices=$(m365 spo listitem list --webUrl $webURL --title "$listName" --fields "Title, Workload, Id"  --output json)
 
 #Checking for any new outages
-newOutageReported=false
+updateSinceLastExecution=false
+echo $'\n### New Outages ###'
 for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
       if [ -z $(echo $currentOutageServices | jq -r '.[].Title | select(. == "'"$workLoad"'")') ]  
       then            
@@ -45,12 +46,19 @@ for workLoad in $(echo $workLoads | jq -r '.[].Workload'); do
             
             #Send notification using CLI Commands
             m365 outlook mail send --to $notifyEmail --subject "Outage Reported in $(echo $addingWorkload | jq -r '.WorkloadDisplayName')" --bodyContents "An outage has been reported for the Service : $(echo $addingWorkload | jq -r '.WorkloadDisplayName') <a href='$webURL/Lists/$listName'>Access the Health Status List</a>" --bodyContentType HTML --saveToSentItems false
+            
             echo "Outage is Reported for Service : $(echo $addingWorkload | jq -r '.WorkloadDisplayName'). Please access \"$webURL/Lists/$listName\" for more information"
-            newOutageReported=true
+            updateSinceLastExecution=true
       fi
 done
+if [ "$updateSinceLastExecution" = false ] ; 
+      then
+            echo "NO New Outages are reported yet."
+fi
 
 #Checking whether any existing outages are resolved
+updateSinceLastExecution=false
+echo $'\n### Resolved Outages ###'
 for service in $(echo $currentOutageServices | jq -r '.[].Title'); do
       if [ -z $(echo $workLoads | jq -r '.[].Workload | select(. == "'"$service"'")') ]  
       then
@@ -61,10 +69,12 @@ for service in $(echo $currentOutageServices | jq -r '.[].Title'); do
             
             #Send notification using CLI Commands
             m365 outlook mail send --to $notifyEmail --subject "Outage RESOLVED for $(echo $removalService | jq -r '.Title')" --bodyContents "Outage which was reported for the Service : $(echo $removalService | jq -r '.Title') is RESOLVED." --bodyContentType HTML --saveToSentItems false
+
+            echo "Outage which was reported for the Service : $(echo $removalService | jq -r '.Title') is now RESOLVED."
+            updateSinceLastExecution=true
       fi
 done
-
-if [ "$newOutageReported" = false ] ; 
+if [ "$updateSinceLastExecution" = false ] ; 
       then
-            echo "No New Outages Reported."
+            echo "No further updates on the existing outages"
 fi
