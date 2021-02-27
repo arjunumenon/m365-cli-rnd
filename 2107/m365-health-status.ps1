@@ -1,5 +1,5 @@
 $webURL = "https://aum365.sharepoint.com/sites/M365CLI"
-$listName = "M365HealthStatus"
+$listName = "M365HealthStatusPS"
 #Email address to which an outage email will be sent
 $notifyEmail = "arjun@aum365.onmicrosoft.com"
 
@@ -27,7 +27,7 @@ $currentOutageServices = (m365 spo listitem list --webUrl $webURL --title $listN
 
 #Checking for any new outages
 $updateSinceLastExecution = $false
-Write-Host "### New Outages ###"
+Write-Host "`n### New Outages ###"
 Foreach ($workload in $workLoads){
     if($workload.Workload -notin $currentOutageServices.Workload){
         #Add outage information to SharePoint List
@@ -46,7 +46,7 @@ if($updateSinceLastExecution -eq $false){
 
 #Checking whether any existing outages are resolved
 $updateSinceLastExecution = $false
-Write-Host "### Resolved Outages ###"
+Write-Host "`n### Resolved Outages ###"
 Foreach ($Service in $currentOutageServices){
     if($Service.Workload -notin $workLoads.Workload){
 
