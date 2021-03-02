@@ -6,6 +6,7 @@
 # startd=$(date -d "$dateTemp" '+%m/%d/%Y %H:%M:%S')
 
 
+#Working approch in both Unix and Macis
 restDateValue="2021-02-25T14:16:56.1242048Z"
 
 epochTimeDate=$(date -d "$restDateValue" +%s)
