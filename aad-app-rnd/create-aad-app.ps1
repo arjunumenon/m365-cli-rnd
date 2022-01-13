@@ -52,7 +52,7 @@ function initiateLoginUsingCustomAddin{
 
 }
 
-# Custom App ID where the Graph API Permissions (Chat.Read, Chat.ReadWrite)
+# Custom App ID where the Graph API Permissions (Chat.Read, Chat.ReadWrite). Update Permission if needed
 $APIPermissionList = "https://graph.microsoft.com/User.Read,https://graph.microsoft.com/Chat.Read,https://graph.microsoft.com/Chat.ReadWrite"
 $AppManifestJSON = "@custom-app-manifest.json"
 
