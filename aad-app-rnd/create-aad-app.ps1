@@ -62,4 +62,3 @@ $CustomAADAppId = $AddedApp.appId
 
 # initiateLoginUsingCustomAddin -CustomAADAppId $CustomAADAppId
 initiateLoginUsingCustomAddin -CustomAADAppId $CustomAADAppId -AppTenantId "7c9154c9-0f63-443e-a07a-8a3ede021afc"
-#Dummy comments please
