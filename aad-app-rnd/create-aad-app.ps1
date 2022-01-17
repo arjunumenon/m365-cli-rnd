@@ -59,6 +59,9 @@ $AppManifestJSON = "@custom-app-manifest.json"
 $AddedApp = createCustomAADApp -APIPermissionList $APIPermissionList -AppManifestJSONFile $AppManifestJSON
 Write-Host "AAD App with the details will be used. App ID : $($AddedApp.appId). Object ID : $($AddedApp.objectId)"
 $CustomAADAppId = $AddedApp.appId
+# # Update App ID if already have an App
+# $CustomAADAppId = "553c74e8-ee1c-4c97-bdac-535997c7de7c"
 
 # initiateLoginUsingCustomAddin -CustomAADAppId $CustomAADAppId
-initiateLoginUsingCustomAddin -CustomAADAppId $CustomAADAppId -AppTenantId "7c9154c9-0f63-443e-a07a-8a3ede021afc"
+$TenantID = "7c9154c9-0f63-443e-a07a-8a3ede021afc"
+initiateLoginUsingCustomAddin -CustomAADAppId $CustomAADAppId -AppTenantId $TenantID
