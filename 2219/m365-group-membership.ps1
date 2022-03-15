@@ -1,6 +1,7 @@
-$siteFilterKeyword = "SPFX"
+$URLFilterKeyWord = "SPFX"
 
-$siteList = m365 spo site list  --type CommunicationSite  --filter "Url -like '$siteFilterKeyword'" --output json | ConvertFrom-Json
+#Getting the Communication Sites which has the URL Filter "SPFX"
+$siteList = m365 spo site list  --type CommunicationSite  --filter "Url -like '$URLFilterKeyWord'" --output json | ConvertFrom-Json
 $TotalSiteCount = $SiteList.Count
 $SiteCounter = 1
 
