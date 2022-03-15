@@ -26,33 +26,23 @@ Foreach ($site in $siteList){
     $UserList = m365 spo group user list --webUrl $site.Url --groupId $AssociatedGroups.OwnerGroup.Id --query "value" --output json | ConvertFrom-Json
 
     Write-Host "Total Users available in the Group : "$UserList.Count
+    $UserlistToBeAdded =  [System.Collections.ArrayList]@()
     Foreach ($User in $UserList){
         # Add Users to Member Group
         write-Host "Adding User $($User.UserPrincipalName) to the Group $($AssociatedGroups.MemberGroup.Id)"
+        
+        # Single User Adding
         m365 spo group user add --webUrl $site.Url --groupId $AssociatedGroups.MemberGroup.Id --userName "$($User.UserPrincipalName)"
+        
+        # # Adding to Arraylist and adding command will be executed later since it supports multiple - 
+        # # user addition in single command call
+        # $UserlistToBeAdded+=$User.UserPrincipalName
         
         # Removing the user from SharePoint Group
         m365 spo group user remove --webUrl $site.Url --groupId $AssociatedGroups.OwnerGroup.Id --userName "$($User.UserPrincipalName)" --confirm
-
     }
 
-    # # Piping Approach
-    # m365 spo group user list --webUrl $site.Url --groupId $AssociatedGroups.OwnerGroup.Id --query "value" --output json | ConvertFrom-Json | ForEach-Object {
-    #     # $CurrentUser = $_
-
-    # #    $CurrentUser |  Get-Member 
-
-    #     # Write-Host "Id : $($_.UserPrincipalName)"
-        
-    #     # Add Users to Member Group
-    #     write-Host "Adding User $($_.UserPrincipalName) to the Group $($AssociatedGroups.MemberGroup.Id)"
-    #     m365 spo group user add --webUrl $site.Url --groupId $AssociatedGroups.MemberGroup.Id --userName "$($_.UserPrincipalName)"
-
-    #     # m365 spo group user remove --webUrl https://contoso.sharepoint.com/sites/SiteA --groupId 5 --userName "Alex.Wilber@contoso.com"
-    # }
-
-    # Write-Host $AssociatedGroups.MemberGroup.Id
-    # Write-Host $AssociatedGroups.OwnerGroup.Id
-    # write-Host $AssociatedGroups.MemberGroup
+    # Write-Host ($UserlistToBeAdded -join ", ")
+    # m365 spo group user add --webUrl $site.Url --groupId $AssociatedGroups.MemberGroup.Id --userName "$UserlistToBeAdded" --debug
     $SiteCounter++
 }
