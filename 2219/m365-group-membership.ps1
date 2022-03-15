@@ -14,5 +14,5 @@ $siteFilterKeyword = "Corporate"
 $siteList = m365 spo site list --output json --query "[? contains(Title,'$siteFilterKeyword')]" | ConvertFrom-Json
 
 Foreach ($site in $siteList){
-    Write-Host "Prcessing the site - $($site.Url)"
+    Write-Host "Processing the site - $($site.Url)"
 }
