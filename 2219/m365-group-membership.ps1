@@ -1,6 +1,6 @@
 $siteFilterKeyword = "Central"
 
-#Getting the Communication Sites whose title contains the keyword "SPFX"
+#Getting the Communication Sites whose title contains the the given keyword
 $siteList = m365 spo site list --type CommunicationSite --output json --query "[? contains(Title,'$siteFilterKeyword')]" | ConvertFrom-Json
 $TotalSiteCount = $SiteList.Count
 Write-Host "Total number sites which has the keyword '$siteFilterKeyword' in their title are : $TotalSiteCount"
